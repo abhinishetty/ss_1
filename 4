@@ -1,0 +1,141 @@
+# ===================== Experiment 08: Login Automation =====================
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+class Login:
+    def setUp(self):
+        self.driver = webdriver.Chrome()
+        self.driver.get("https://sahyadri.digital/")
+
+    def test_login(self):
+        driver = self.driver
+        driver.find_element(By.ID, "student-tab").click()
+        time.sleep(2)
+        driver.find_element(By.NAME, "admission_no").send_keys("your_admission_no")
+        time.sleep(1)
+        driver.find_element(By.CLASS_NAME, "student_pass").send_keys("your_password")
+        time.sleep(1)
+        driver.find_element(By.ID, "login-student").click()
+        time.sleep(5)
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":
+    t = Login()
+    t.setUp()
+    t.test_login()
+    t.tearDown()
+
+# ===================== Experiment 09: Count Web Page Elements =====================
+import unittest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+class Count(unittest.TestCase):
+    def setUp(self):
+        self.driver = webdriver.Chrome()
+        self.driver.get("https://www.google.co.in")
+        self.driver.maximize_window()
+
+    def test_count_elements(self):
+        driver = self.driver
+        links = driver.find_elements(By.TAG_NAME, "a")
+        print("TOTAL LINKS =", len(links))
+        buttons = driver.find_elements(By.TAG_NAME, "button")
+        print("TOTAL BUTTONS =", len(buttons))
+        inputs = driver.find_elements(By.TAG_NAME, "input")
+        print("TOTAL INPUT FIELDS =", len(inputs))
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":
+    unittest.main()
+
+# ===================== Experiment 10: Copy Web Page Details =====================
+from selenium import webdriver
+import time
+
+class WebPageFetcher:
+    def setUp(self):
+        self.driver = webdriver.Chrome()
+
+    def fetch_page(self):
+        self.driver.get("https://www.btreesystems.com/selenium-with-python-training-in-chennai/")
+        time.sleep(2)
+        page_source = self.driver.page_source.encode("utf-8")
+        with open("result.html", "wb") as f:
+            f.write(page_source)
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":
+    f = WebPageFetcher()
+    f.setUp()
+    f.fetch_page()
+    f.tearDown()
+
+# ===================== Experiment 11: Google Maps Automation =====================
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+class GoogleMapsAutomation:
+    def setUp(self):
+        self.driver = webdriver.Chrome()
+
+    def search_location(self):
+        self.driver.get("https://www.google.com/maps")
+        time.sleep(2)
+        search_input = self.driver.find_element(By.XPATH, '//*[@id="searchboxinput"]')
+        search_input.send_keys("Mangalore")
+        time.sleep(1)
+        search_btn = self.driver.find_element(By.XPATH, '//*[@id="searchbox-searchbutton"]')
+        search_btn.click()
+        time.sleep(5)
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":
+    g = GoogleMapsAutomation()
+    g.setUp()
+    g.search_location()
+    g.tearDown()
+
+# ===================== Experiment 12: Google Form Automation =====================
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+class GoogleFormAutomation:
+    def setUp(self):
+        self.driver = webdriver.Chrome()
+
+    def fill_form(self):
+        self.driver.get("https://forms.gle/vDCCNyhkBhBsUCja9")
+        time.sleep(2)
+
+        name = self.driver.find_element(By.XPATH, '//input[@aria-labelledby="i1 i4"]')
+        name.send_keys("Your Name")
+        time.sleep(1)
+
+        usn = self.driver.find_element(By.XPATH, '//input[@aria-labelledby="i6 i9"]')
+        usn.send_keys("Your USN")
+        time.sleep(1)
+
+        submit = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div/span/span')
+        submit.click()
+        time.sleep(2)
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":
+    s = GoogleFormAutomation()
+    s.setUp()
+    s.fill_form()
+    s.tearDown()
