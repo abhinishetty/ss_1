@@ -60,7 +60,7 @@ int main() {
 
         sales = (tlocks * lprice) + (tstocks * sprice) + (tbarrels * bprice);
         printf("Total sales is %f\n", sales);
-
+if(sales>0){
         if(sales > 1800) {
             comm = 0.10 * 1000.0;
             comm += 0.15 * 800.0;
@@ -74,6 +74,7 @@ int main() {
             comm = 0.10 * sales;
 
         printf("Commission is %f\n", comm);
+    }
     }
     else
         printf("There is no sales\n");
